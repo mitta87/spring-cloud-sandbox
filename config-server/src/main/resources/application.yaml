@@ -1,0 +1,29 @@
+logging:
+  level:
+    org:
+      springframework:
+        jdbc:
+          core: debug
+
+
+server:
+  port: 8888
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  profiles:
+    active: jdbc
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: file:///home/mitya/IdeaProjects/spring-cloud-sandbox/config-server/src/main/resources/configs/{application}
+        jdbc:
+          sql: SELECT KEY, VALUE from CONFIG_PROPERTIES where APPLICATION=? and PROFILE=? and LABEL=?
+
+management:
+  security:
+    enabled: false
+
